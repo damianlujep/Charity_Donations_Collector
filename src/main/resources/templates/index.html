@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
- <!--Head and navigation Content-->
- <div th:insert="fragments/header :: HeadAndNavigation"></div>
+  <!--Head and navigation Content-->
+  <head th:replace="fragments/header :: HeaderContent"></head>
+  <body>
+  <header th:replace="fragments/header :: NavigationContent"></header>
+  <!--End - Head and navigation Content-->
 
-      <div class="slogan container container--90">
-        <div class="slogan--item">
-          <h1>
-            Zacznij pomagać!<br />
-            Oddaj niechciane rzeczy w zaufane ręce
-          </h1>
-        </div>
-      </div>
-    </header>
-
-    <section id="stats" class="stats">
+  <section id="stats" class="stats">
       <div class="container container--85">
         <div class="stats--item">
           <em>10</em>
@@ -107,7 +100,7 @@
     </section>
 
     <!--Footer and Scripts Content-->
-    <div th:insert="fragments/footer :: mainFooterAndScripts"></div>
+    <footer th:replace="fragments/footer :: mainFooterAndScripts"></footer>
 
   </body>
 </html>
