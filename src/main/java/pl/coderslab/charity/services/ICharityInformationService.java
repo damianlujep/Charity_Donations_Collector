@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ICharityInformationService {
     List<Institution> getInstitutionsList();
+    int getSumAllBagsDonated();
+    int countAllDonationsRealized();
 }
