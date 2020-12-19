@@ -24,9 +24,7 @@ public class HomeController {
     @RequestMapping("/")
     public ModelAndView homeAction(){
         ModelAndView homePage = new ModelAndView("index");
-        List<Institution> institutionsList = charityInformationService.getInstitutionsList();
-
-        homePage.addObject("institutionsList", institutionsList);
+        homePage.addObject("institutionsList", charityInformationService.getInstitutionsList());
         homePage.addObject("sumAllBagsDonated",charityInformationService.getSumAllBagsDonated());
         homePage.addObject("donationsNumber", charityInformationService.countAllDonationsRealized());
 

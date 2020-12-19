@@ -21,7 +21,7 @@ public class Donation {
     private int id;
     private int bagsQuantity;
     @ManyToMany
-    @JoinTable(name = "donation_categories")
+    @JoinTable(name = "donations_categories")
     private List<Category> categories = new ArrayList<>();
     @ManyToOne
     private Institution institution;
