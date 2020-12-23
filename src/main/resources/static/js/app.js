@@ -164,6 +164,40 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+      let categories, bagsNumber, institution, street, city, zipCode, phone, pickUpDate, pickUpTime, pickUpComment;
+      categories = document.querySelectorAll("input[type='checkbox']:checked");
+      bagsNumber = document.getElementById("bagsNumber");
+      institution = document.querySelectorAll("input[type='radio']:checked");
+      street = document.getElementById("street");
+      city = document.getElementById("city");
+      zipCode = document.getElementById("zipCode");
+      phone = document.getElementById("phone");
+      pickUpDate = document.getElementById("pickUpDate");
+      pickUpTime = document.getElementById("pickUpTime");
+      pickUpComment = document.getElementById("pickUpComment");
+
+      let bagsNumberAndCategorySumm, institutionSumm, listWithAddressAndPhone, listWithPickUpInfo;
+      bagsNumberAndCategorySumm = document.getElementById("bagsNumberAndCategorySumm");
+      institutionSumm = document.getElementById("institutionSumm");
+      listWithAddressAndPhone = document.getElementById("listWithAddressAndPhone");
+      listWithPickUpInfo = document.getElementById("listWithPickUpInfo");
+
+      bagsNumberAndCategorySumm.innerText = bagsNumber.value + " worki z kategorii: " ;
+      institutionSumm.innerText = institution.value;
+
+      listWithAddressAndPhone.innerText = "";
+
+      let li1 = document.createElement("li");
+      li3.innerText = street.value;
+      listWithAddressAndPhone.appendChild(li1);
+
+      let li2 = document.createElement("li");
+      li3.innerText = city.value;
+      listWithAddressAndPhone.appendChild(li2);
+
+      let li3 = document.createElement("li");
+      li3.innerText = zipCode.value;
+      listWithAddressAndPhone.appendChild(li3);
     }
 
   }

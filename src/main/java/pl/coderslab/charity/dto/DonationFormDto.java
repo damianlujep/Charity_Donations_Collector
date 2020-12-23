@@ -7,10 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.charity.entity.Category;
 import pl.coderslab.charity.entity.Institution;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -34,8 +31,10 @@ public class DonationFormDto {
     @NotBlank
     private String city;
     @NotBlank
+    @Pattern(regexp = " [0-9]{2}-[0-9]{3}")
     private String zipCode;
     @NotBlank
+    @Pattern(regexp = "(?<!\\w)(\\(?(\\+|00)?48\\)?)?[ -]?\\d{3}[ -]?\\d{3}[ -]?\\d{3}(?!\\w)")
     private String phoneNumber;
 
     //Pick up date
