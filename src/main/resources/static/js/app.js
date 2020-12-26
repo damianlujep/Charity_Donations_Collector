@@ -166,15 +166,25 @@ document.addEventListener("DOMContentLoaded", function() {
       // TODO: get data from inputs and show them in summary
       let categories, bagsNumber, institution, street, city, zipCode, phone, pickUpDate, pickUpTime, pickUpComment;
       categories = document.querySelectorAll("input[type='checkbox']:checked");
-      bagsNumber = document.getElementById("bagsNumber");
-      institution = document.querySelectorAll("input[type='radio']:checked");
+
+      let categoriesNames = [];
+      for (let c of categories){
+        categoriesNames.push(c.parentNode.lastElementChild.textContent);
+        console.log(categoriesNames)
+      }
+
+      bagsNumber = document.querySelector("input[type='number']");
+      institution = document.querySelector("input[type='radio']:checked");
+      let institutionName = institution.parentNode.lastElementChild.firstElementChild.textContent;
+      console.log(institutionName)
+
       street = document.getElementById("street");
       city = document.getElementById("city");
       zipCode = document.getElementById("zipCode");
-      phone = document.getElementById("phone");
-      pickUpDate = document.getElementById("pickUpDate");
-      pickUpTime = document.getElementById("pickUpTime");
-      pickUpComment = document.getElementById("pickUpComment");
+      phone = document.querySelector("input[type='tel']");
+      pickUpDate = document.querySelector("input[type='date']");
+      pickUpTime = document.querySelector("input[type='time']");
+      pickUpComment = document.querySelector("textarea");
 
       let bagsNumberAndCategorySumm, institutionSumm, listWithAddressAndPhone, listWithPickUpInfo;
       bagsNumberAndCategorySumm = document.getElementById("bagsNumberAndCategorySumm");
@@ -182,22 +192,44 @@ document.addEventListener("DOMContentLoaded", function() {
       listWithAddressAndPhone = document.getElementById("listWithAddressAndPhone");
       listWithPickUpInfo = document.getElementById("listWithPickUpInfo");
 
-      bagsNumberAndCategorySumm.innerText = bagsNumber.value + " worki z kategorii: " ;
-      institutionSumm.innerText = institution.value;
+      bagsNumberAndCategorySumm.innerText = bagsNumber.value + " worki z kategorii: " + categoriesNames.join(", ");
+      institutionSumm.innerText = "Dla fundacji: " + institutionName;
 
       listWithAddressAndPhone.innerText = "";
 
       let li1 = document.createElement("li");
-      li3.innerText = street.value;
+      li1.innerText = street.value;
       listWithAddressAndPhone.appendChild(li1);
 
       let li2 = document.createElement("li");
-      li3.innerText = city.value;
+      li2.innerText = city.value;
       listWithAddressAndPhone.appendChild(li2);
 
       let li3 = document.createElement("li");
       li3.innerText = zipCode.value;
       listWithAddressAndPhone.appendChild(li3);
+
+      let li4 = document.createElement("li");
+      li4.innerText = phone.value;
+      listWithAddressAndPhone.appendChild(li4);
+
+      listWithPickUpInfo.innerText = "";
+
+      let li5 = document.createElement("li");
+      li5.innerText = pickUpDate.value;
+      listWithPickUpInfo.appendChild(li5);
+
+      let li6 = document.createElement("li");
+      li6.innerText = pickUpTime.value;
+      listWithPickUpInfo.appendChild(li6);
+
+      let li7 = document.createElement("li");
+        if (pickUpComment.value === ""){
+          li7.innerText = "Brak uwagi";
+        } else {
+          li7.innerText = pickUpComment.value;
+        }
+        listWithPickUpInfo.appendChild(li7);
     }
 
   }
