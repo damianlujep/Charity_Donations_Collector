@@ -187,13 +187,17 @@ document.addEventListener("DOMContentLoaded", function() {
       pickUpComment = document.querySelector("textarea");
 
       let bagsNumberAndCategorySumm, institutionSumm, listWithAddressAndPhone, listWithPickUpInfo;
-      bagsNumberAndCategorySumm = document.getElementById("bagsNumberAndCategorySumm");
-      institutionSumm = document.getElementById("institutionSumm");
-      listWithAddressAndPhone = document.getElementById("listWithAddressAndPhone");
-      listWithPickUpInfo = document.getElementById("listWithPickUpInfo");
 
+      let donationInfoSumm = document.querySelector("div[data-step='5'] .summary .form-section ul");
+      bagsNumberAndCategorySumm = donationInfoSumm.firstElementChild.querySelector("span[class='summary--text']");
+      institutionSumm = donationInfoSumm.lastElementChild.querySelector("span[class='summary--text']");
+
+      let pickUpInfoSumm = document.querySelector("div[data-step='5'] .summary div[class='form-section form-section--columns']");
       bagsNumberAndCategorySumm.innerText = bagsNumber.value + " worki z kategorii: " + categoriesNames.join(", ");
       institutionSumm.innerText = "Dla fundacji: " + institutionName;
+
+      listWithAddressAndPhone = pickUpInfoSumm.firstElementChild.querySelector("ul");
+      listWithPickUpInfo = pickUpInfoSumm.lastElementChild.querySelector("ul");
 
       listWithAddressAndPhone.innerText = "";
 
@@ -233,6 +237,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
   }
+
   const form = document.querySelector(".form--steps");
   if (form !== null) {
     new FormSteps(form);
