@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <!--Header-->
+    <head th:fragment="HeaderContent">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Zacznij pomagać</title>
+        <link rel="stylesheet" href="css/style.css"/>
+    </head>
+
+    <!--Navigation content-->
+    <header class="header--main-page" th:fragment="NavigationContent">
+        <nav th:replace="/fragments/navigation-main-content :: NavigationMain"></nav>
+
+        <div class="slogan container container--90">
+            <div class="slogan--item">
+                <h1>
+                    Zacznij pomagać!<br />
+                    Oddaj niechciane rzeczy w zaufane ręce
+                </h1>
+            </div>
+        </div>
+    </header>
+    <!--End Navigation content-->
+
+</html>
