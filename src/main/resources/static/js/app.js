@@ -125,8 +125,11 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep++;
-          this.updateForm();
+          //Validation
+          if (this.validateForm()){
+            this.currentStep++;
+            this.updateForm();
+          }
         });
       });
 
@@ -147,6 +150,88 @@ document.addEventListener("DOMContentLoaded", function() {
      * Update form front-end
      * Show next or previous section etc.
      */
+
+    validateForm(){
+      let step = this.currentStep;
+      let currentStepValidation = form.querySelector("div[data-step="+ CSS.escape(step) + "]");
+      let errorMessage = currentStepValidation.querySelector(".error");
+
+      switch (step){
+        case 1:
+          let categories = document.querySelectorAll("input[type='checkbox']:checked");
+          if(categories.length === 0){
+            if (!errorMessage.hasChildNodes()){
+              let errorDiv = this.createDivError();
+              errorDiv.innerText = "Wybierz co najmniej 1 kategorię";
+              errorMessage.appendChild(errorDiv);
+            }
+            return false;
+          } else {
+            while (errorMessage.firstElementChild){
+              errorMessage.firstElementChild.remove();
+            }
+            return true;
+          }
+        case 2:
+          let bagsNumber = document.querySelector("input[type='number']").value;
+          if (bagsNumber <= 0){
+            if (!errorMessage.hasChildNodes()){
+              let errorDiv = this.createDivError();
+              errorDiv.innerText = "Liczba worków ma byc najmniej 1";
+              errorMessage.appendChild(errorDiv);
+            }
+            return false;
+          } else {
+            while (errorMessage.firstElementChild){
+              errorMessage.firstElementChild.remove();
+            }
+            return true;
+          }
+        case 3:
+          let institution = document.querySelector("input[type='radio']:checked");
+          if (institution === null){
+            if (!errorMessage.hasChildNodes()){
+              let errorDiv = this.createDivError();
+              errorDiv.innerText = "Wybierz co najmniej 1 fundację";
+              errorMessage.appendChild(errorDiv);
+            }
+            return false;
+          } else {
+            while (errorMessage.firstElementChild){
+              errorMessage.firstElementChild.remove();
+            }
+            return true;
+          }
+        case 4:
+          let street = document.getElementById("street").value;
+          let city = document.getElementById("city").value;
+          let zipCode = document.getElementById("zipCode").value;
+          let phone = document.querySelector("input[type='tel']").value;
+          let pickUpDate = document.querySelector("input[type='date']").value;
+          let pickUpTime = document.querySelector("input[type='time']").value;
+
+          if (street === "" || city === "" || zipCode === "" || phone === "" || pickUpTime === "" || pickUpDate === ""){
+            if (!errorMessage.hasChildNodes()){
+              let errorDiv = this.createDivError();
+              errorDiv.innerText = "Ulica, Miasto, Kod pocztowy, Data oraz Godziny są pole wymagane";
+              errorMessage.appendChild(errorDiv);
+            }
+            return false;
+          } else {
+            while (errorMessage.firstElementChild){
+              errorMessage.firstElementChild.remove();
+            }
+            return true;
+          }
+      }
+    };
+
+    createDivError(){
+      let errorDiv = document.createElement("div");
+      errorDiv.className ="alert alert-danger";
+      return errorDiv;
+    }
+
     updateForm() {
       this.$step.innerText = this.currentStep;
 
@@ -170,13 +255,11 @@ document.addEventListener("DOMContentLoaded", function() {
       let categoriesNames = [];
       for (let c of categories){
         categoriesNames.push(c.parentNode.lastElementChild.textContent);
-        console.log(categoriesNames)
       }
 
       bagsNumber = document.querySelector("input[type='number']");
       institution = document.querySelector("input[type='radio']:checked");
       let institutionName = institution.parentNode.lastElementChild.firstElementChild.textContent;
-      console.log(institutionName)
 
       street = document.getElementById("street");
       city = document.getElementById("city");

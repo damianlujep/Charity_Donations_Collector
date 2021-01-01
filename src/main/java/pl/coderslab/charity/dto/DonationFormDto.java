@@ -31,7 +31,7 @@ public class DonationFormDto {
     @NotBlank
     private String city;
     @NotBlank
-    @Pattern(regexp = " [0-9]{2}-[0-9]{3}")
+//    @Pattern(regexp = " [0-9]{2}-[0-9]{3}")
     private String zipCode;
     @NotBlank
     @Pattern(regexp = "(?<!\\w)(\\(?(\\+|00)?48\\)?)?[ -]?\\d{3}[ -]?\\d{3}[ -]?\\d{3}(?!\\w)")

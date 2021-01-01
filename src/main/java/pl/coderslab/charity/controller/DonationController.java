@@ -36,6 +36,8 @@ public class DonationController {
             return new ModelAndView("form", "donationModel", donationModel);
         }
 
+        donationsService.saveCompletedDonation(donationModel);
+
         return new ModelAndView("redirect:formConfirmation");
     }
 
