@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <!--Navigation content for members-->
     <header class="header--form-page" th:fragment="HeaderAndNavigationApp">
         <nav class="container container--70" th:fragment="NavigationApp">
             <ul class="nav--actions">
+                <div sec:authorize="hasRole('ROLE_USER')">
                 <li class="logged-user">
-                    Witaj Agata
+                    Witaj <span th:text="${session.currentAdminLogged}"></span>
                     <ul class="dropdown">
                         <li><a href="#">Profil</a></li>
                         <li><a href="#">Moje zbiórki</a></li>
                         <li><a href="#">Wyloguj</a></li>
                     </ul>
                 </li>
+                </div>
             </ul>
 
             <ul>

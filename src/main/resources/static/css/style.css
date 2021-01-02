@@ -1831,8 +1831,9 @@ footer .bottom-line--icons a img {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-  font-size: small;
+  font-size: medium;
   font-weight: bold;
+  width: max-content;
 }
 
 .alert-danger {

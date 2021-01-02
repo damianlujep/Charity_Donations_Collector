@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (street === "" || city === "" || zipCode === "" || phone === "" || pickUpTime === "" || pickUpDate === ""){
             if (!errorMessage.hasChildNodes()){
               let errorDiv = this.createDivError();
-              errorDiv.innerText = "Ulica, Miasto, Kod pocztowy, Data oraz Godziny są pole wymagane";
+              errorDiv.innerText = "Ulica, Miasto, Kod pocztowy, Data oraz Godzina są pole wymagane";
               errorMessage.appendChild(errorDiv);
             }
             return false;
