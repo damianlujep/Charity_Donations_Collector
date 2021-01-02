@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import pl.coderslab.charity.services.MyMemberDetailsService;
@@ -34,11 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationSuccessHandler successHandler() {
-//        return new MyCustomLoginSuccessHandler("/yourdefaultsuccessurl");
-//    }
-
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //Configuration to read credentials from DB
@@ -47,7 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
@@ -56,17 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
 
         http.authorizeRequests()
-                        .antMatchers("/", "/booking/**", "/login", "/registration", "/test").permitAll() //allow public access
-                        .antMatchers("/members/**", "/members/booking/**").access("hasRole('ROLE_MEMBER')") //strony, które potrzebują user, admin
+                        .antMatchers("/", "/login", "/registration").permitAll() //allow public access
+                        .antMatchers("/donations/**").access("hasRole('ROLE_USER')") //strony, które potrzebują user, admin
                         .antMatchers("/resources/**").permitAll()
-                        .antMatchers("/css/**", "/js/**", "/images/**","/fonts/**").permitAll()
+                        .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 .and()
                 .formLogin()
                         .loginPage("/login")
                         .loginProcessingUrl("/authenticateMember")
-                        .defaultSuccessUrl("/form");
-//                        .successHandler(successHandler());
+                        .defaultSuccessUrl("/donations/form");
         //tutaj można dodać log-out
     }
 }

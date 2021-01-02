@@ -8,6 +8,7 @@ import pl.coderslab.charity.validator.ValidEmail;
 import pl.coderslab.charity.validator.ValidPassword;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
@@ -35,6 +36,7 @@ public class MemberDto {
     private String rePassword;
 
     @NotBlank
+    @Pattern(regexp = "(?<!\\w)(\\(?(\\+|00)?48\\)?)?[ -]?\\d{3}[ -]?\\d{3}[ -]?\\d{3}(?!\\w)")
     @Size(min = 7, max = 20, message = "{ValidPhoneNumber}")
     private String phone;
 }

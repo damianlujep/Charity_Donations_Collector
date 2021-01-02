@@ -47,12 +47,4 @@ public class DonationFormDto {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;
     private String pickUpComment;
-
-
-
-
-
-
-
-
 }
