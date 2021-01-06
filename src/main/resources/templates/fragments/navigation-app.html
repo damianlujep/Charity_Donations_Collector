@@ -3,17 +3,19 @@
     <!--Navigation content for members-->
     <header class="header--form-page" th:fragment="HeaderAndNavigationApp">
         <nav class="container container--70" th:fragment="NavigationApp">
-            <ul class="nav--actions">
-                <div sec:authorize="hasRole('ROLE_USER')">
+            <ul class="nav--actions" sec:authorize="hasRole('ROLE_USER')">
                 <li class="logged-user">
                     Witaj <span th:text="${session.currentAdminLogged}"></span>
                     <ul class="dropdown">
                         <li><a href="#">Profil</a></li>
                         <li><a href="#">Moje zbiórki</a></li>
-                        <li><a href="#">Wyloguj</a></li>
+                        <li>
+                            <a href="#" onclick="logout()">Wyloguj</a>
+                            <!--<a href="#" onclick="document.getElementById('logOutForm').submit()">Wyloguj</a>-->
+                            <form id="logOutForm" th:action="@{/perform_logout}" method="POST"></form>
+                        </li>
                     </ul>
                 </li>
-                </div>
             </ul>
 
             <ul>
