@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
 
         http.authorizeRequests()
-                        .antMatchers("/", "/login", "/registration").permitAll() //allow public access
+                        .antMatchers("/", "/login", "/logout", "/registration").permitAll() //allow public access
                         .antMatchers("/donations/**").access("hasRole('ROLE_USER')") //strony, które potrzebują user, admin
                         .antMatchers("/resources/**").permitAll()
                         .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
@@ -58,7 +58,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                         .loginPage("/login")
                         .loginProcessingUrl("/authenticateMember")
-                        .defaultSuccessUrl("/donations/form");
+                        .defaultSuccessUrl("/donations/form")
+                .and()
+                .logout()
+                        .logoutUrl("/perform_logout")
+                        .logoutSuccessUrl("/")
+                .and()
+                .httpBasic();
+//                        .invalidateHttpSession(true)
+//                        .deleteCookies("JSESSIONID");
         //tutaj można dodać log-out
     }
 }

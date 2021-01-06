@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
+  let logoutForm = document.querySelector("nav ul[class='dropdown']").lastElementChild.firstElementChild;
+  logoutForm.onclick = function (){
+    document.getElementById('logOutForm').submit();
+  };
 
   /**
    * Form Select

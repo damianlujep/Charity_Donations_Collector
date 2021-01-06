@@ -13,7 +13,11 @@
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
+                    <li>
+                        <a href="#">Wyloguj</a>
+<!--                        <a href="#" onclick="document.getElementById('logOutForm').submit()">Wyloguj</a>-->
+                        <form id="logOutForm" th:action="@{/perform_logout}" method="POST"></form>
+                    </li>
                 </ul>
             </li>
         </ul>
