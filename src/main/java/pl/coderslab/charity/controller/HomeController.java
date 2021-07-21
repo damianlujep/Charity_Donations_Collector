@@ -62,7 +62,7 @@ public class HomeController {
             return mav;
         }
 
-        return new ModelAndView("redirect: login", "memberRegistered", memberRegistered);
+        return new ModelAndView("redirect:login", "memberRegistered", memberRegistered);
 
     }
 

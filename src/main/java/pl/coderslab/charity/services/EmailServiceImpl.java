@@ -11,13 +11,11 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 @Component
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceImpl implements IEmailService {
     private final JavaMailSender emailSender;
     private final SpringTemplateEngine templateEngine;
 
@@ -30,26 +28,11 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("melatronik.ing@gmail.com");
+        message.setFrom("project.email.testing2021@gmail.com");
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
-    }
-
-    @Override
-    public void sendSimpleMessageUsingTemplate(String to, String subject, String... templateModel) {
-
-    }
-
-    @Override
-    public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
-
-    }
-
-    @Override
-    public void sendMessageUsingThymeleafTemplate(String to, String subject, Map<String, Object> templateModel) throws IOException, MessagingException {
-
     }
 
     @Override
@@ -58,13 +41,14 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         Context context = new Context();
+        context.setVariable("date", null);
 
-        String html = templateEngine.process("/email/email-confirmation-template", context);
+//        String html = templateEngine.process("/email/email-confirmation-template", context);
 
         helper.setTo(to);
         helper.setSubject(subject);
-        helper.setText(html, true);
-        helper.setFrom("no-reply@trattoriaamici.pl", "Trattoria Amici");
+        helper.setText(htmlBody, true);
+        helper.setFrom("project.email.testing2021@gmail.com", "Confirmation of Donation");
         emailSender.send(message);
     }
 }
