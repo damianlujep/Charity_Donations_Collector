@@ -1,5 +1,9 @@
 package pl.coderslab.charity.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,6 +19,7 @@ import java.util.List;
 @Data
 @ToString
 @NoArgsConstructor
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "donations")
 public class Donation {
     @Id
@@ -25,6 +30,7 @@ public class Donation {
     @JoinTable(name = "donations_categories")
     private List<Category> categories = new ArrayList<>();
     @ManyToOne
+    @JsonBackReference
     private Institution institution;
     private String street;
     private String city;

@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       bagsNumber = document.querySelector("input[type='number']");
       institution = document.querySelector("input[type='radio']:checked");
-      let institutionName = institution.parentNode.lastElementChild.firstElementChild.textContent;
+      let institutionName = institution.parentElement.lastElementChild.firstElementChild.textContent;
 
       street = document.getElementById("street");
       city = document.getElementById("city");
