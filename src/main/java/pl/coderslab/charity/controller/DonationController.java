@@ -16,10 +16,13 @@ import pl.coderslab.charity.entity.Institution;
 import pl.coderslab.charity.entity.Member;
 import pl.coderslab.charity.services.ICharityInformationService;
 import pl.coderslab.charity.services.IDonationsService;
+import pl.coderslab.charity.services.IEmailService;
 import pl.coderslab.charity.services.IMemberService;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -28,11 +31,13 @@ public class DonationController {
     private final IDonationsService donationsService;
     private final ICharityInformationService charityInformationService;
     private final IMemberService memberService;
+    private final IEmailService emailService;
 
-    public DonationController(IDonationsService donationsService, ICharityInformationService charityInformationService, IMemberService memberService) {
+    public DonationController(IDonationsService donationsService, ICharityInformationService charityInformationService, IMemberService memberService, IEmailService emailService) {
         this.donationsService = donationsService;
         this.charityInformationService = charityInformationService;
         this.memberService = memberService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/form")
@@ -49,12 +54,13 @@ public class DonationController {
     }
 
     @PostMapping("/form")
-    public ModelAndView donationsFormHandler(@Valid DonationFormDto donationModel, BindingResult result){
+    public ModelAndView donationsFormHandler(@Valid DonationFormDto donationModel, BindingResult result, Authentication auth) throws MessagingException, UnsupportedEncodingException {
         if (result.hasErrors()){
             return new ModelAndView("form", "donationModel", donationModel);
         }
 
         donationsService.saveCompletedDonation(donationModel);
+        emailService.sendHtmlMessage(auth.getName(), emailService.handleDataForEmail(donationModel));
 
         return new ModelAndView("redirect:formConfirmation");
     }

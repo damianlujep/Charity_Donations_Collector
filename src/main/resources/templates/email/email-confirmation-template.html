@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzenie darowizny</title>
+</head>
+<body>
+<h1 style="color: cornflowerblue">Dziękujemy za pomoc!</h1>
+<h2>Oto podsumowanie Twojej darowizny:</h2>
+<ul>
+    <li>
+        Kategorie:
+        <ul th:each="category:${categories}">
+            <li th:text="${category.name}"></li>
+        </ul>
+    </li>
+    <li>
+        Nazwa fundacji:  <span th:text="${institution.name}"></span>
+        <div th:text="${institution.description}"></div>
+    </li>
+    <li>Ilość worków:  <span th:text="${bagsQuantity}"></span></li>
+    <li>Miasto: <span th:text="${city}"></span></li>
+    <li>Data i godzina odbioru: <span th:text="${pickUpDate}"></span> o <span th:text="${pickUpTime}"></span></li>
+    <li>Adres: <span th:text="${street}"></span> , <span th:text="${zipCode}"></span></li>
+
+    <p>Komentarz: <span th:text="${pickUpComment}"></span></p>
+    <h3 style="color: red">To jest testowy e-mail aplikacji charytatywnej, nie odpowiadaj na tę wiadomość</h3>
+</ul>
+</body>
+</html>

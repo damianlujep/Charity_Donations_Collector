@@ -1,5 +1,6 @@
 package pl.coderslab.charity.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -20,5 +21,6 @@ public class Institution {
     private String name;
     private String description;
     @OneToMany(mappedBy = "institution")
+    @JsonManagedReference
     private List<Donation> donations = new ArrayList<>();
 }
