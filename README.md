@@ -1,4 +1,4 @@
-#Charity_Donations_Collector
+# Charity_Donations_Collector
 
 This project consists of two 2 parts:
 1. One-page website, which is divided into sections such as about, list of foundations and a contact form.
@@ -7,7 +7,7 @@ This project consists of two 2 parts:
 The app allows `user authentication`, because only registered users can make donations. Is possible to keep registering 
 users with an email and password that have not been previously registered.
 
-###Functionalities and characteristics:
+### Functionalities and characteristics:
 - Relational database in MySQL
 - Validation of registration and login forms
 - `Passay` for password's strength validation during registration
@@ -16,8 +16,9 @@ users with an email and password that have not been previously registered.
 - `Error messages` for inputs read from `message.properties`
 - **Donation confirmation by email** after correctly filling out the donation form
 
-###Database diagram:
-<img src="database-diagram.png" alt="database" width="300">
+### Database diagram:
+<img src="database-diagram.png" alt="database" width="500">
 
-###Technologies and tools:
-The app was developed using: `SpringBoot, SpringSecurity, Spring Email, Lombok, Passay, Thymeleaf, MySQL, JavaScript, HTML5 and CSS.
+### Technologies and tools:
+Tools and Technologies used: IntelliJ, GitHub, Maven, Thymeleaf, Spring Boot, Spring Security, Spring Email, Hibernate,
+Hibernate Validator, JavaScript, MySQL, Lombok, Passay
